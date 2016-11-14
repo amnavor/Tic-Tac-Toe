@@ -1,4 +1,3 @@
-
 var wins = [
   [1, 2, 3],
   [4, 5, 6],
@@ -10,6 +9,7 @@ var wins = [
   [2, 5, 8]
 ];
 
+//start with a clear board
 $(document).ready(function() {
   $(".signTwo").addClass("hidden");
   $(".signOne").addClass("hidden");
@@ -22,7 +22,9 @@ $(document).ready(function() {
   var currPlayer;
   var computer = false;
   var over = false;
+  var compTurn = false;
 
+  //first menu option, ie single vs two player
   $("#first").click(function() {
     $(".signOne").removeClass("hidden");
     $(".players").addClass("hidden");
@@ -34,6 +36,7 @@ $(document).ready(function() {
     computer = true;
   });
 
+  //second option: x vs o
   $(".x").click(function() {
     playerOne = "x";
     playerTwo = "o";
@@ -56,8 +59,10 @@ $(document).ready(function() {
     $('#p1').html('O');
   });
 
+  //startover -- can be selected at anytime to clear all settings
   $(".startOver").click(function() {
     oneList = [];
+    compTurn = false;
     over = false;
      twoList = [];
      playedList = [];
@@ -75,9 +80,12 @@ $(document).ready(function() {
     }
   });
 
+  //response to clicking of tic tac toe board
   $("td").click(function() {
     var num = $(this).attr('id');
-    if ( (over == false) && (playedList.indexOf(num) == -1)) {
+    //if game is still going, box hasn't been selected yet, and 
+    //it is not the computer's turn, click will result in x/o placing
+    if ( (over == false) && (playedList.indexOf(num) == -1) && (compTurn == false)) {
       $("#" + num).html(currPlayer);
       playedList.push(num);
       if (currPlayer == playerOne) {
@@ -92,19 +100,26 @@ $(document).ready(function() {
     }
   });
 
+  //checks if board has any three in a rows and return message
 function winCheck(lst) {
 for(var i = 0; i<8; i++){
   var win = wins[i];
  if ((inArray(lst, win[0])>0) && (inArray(lst, win[1])>0) && (inArray(lst, win[2])>0)) {
-   $("#msg").html("win!"); 
+   if (currPlayer == playerOne) {
+      $("#msg").html("Player One wins! Play again!"); 
+   } else {
+      $("#msg").html("Player Two wins! Play again!"); 
+   }
    over = true;
 } else if (playedList.length==9 && over == false){
-  $("#msg").html("tie");
+  $("#msg").html("It's a tie! Try again!");
   over = true;
 }
 }
 }
-  
+
+  //check if x is in array arr.  Solution to inability
+  //to use .indexOf() 
 function inArray(arr, x) {
   for (var i = 0; i<arr.length; i++) {
     if (arr[i] == x){
@@ -113,5 +128,28 @@ function inArray(arr, x) {
   }
   return 0;
 }
+ 
+  //computer's turn after pause 
+  function compTurn() {
+    compTurn = true;
+    window.setTimeout(function(){
+      
+      var num = 5;
+      
+      $("#" + num).html(currPlayer);
+      playedList.push(num);
+      if (currPlayer == playerOne) {
+        oneList.push(num);
+        winCheck(oneList);
+        currPlayer = playerTwo;
+      } else {
+        twoList.push(num);
+        winCheck(twoList);
+        currPlayer = playerOne;
+      }
+      
+    }, 5000);
+    compTurn = false;
+  }
 });
 
