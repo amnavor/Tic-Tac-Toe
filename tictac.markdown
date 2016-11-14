@@ -1,7 +1,7 @@
-TicTac
+TicTacToe
 ------
 
 
-A [Pen](http://codepen.io/amnavor/pen/mOVBRm) by [Amna](http://codepen.io/amnavor) on [CodePen](http://codepen.io/).
+[Link](http://codepen.io/amnavor/pen/mOVBRm).
 
 [License](http://codepen.io/amnavor/pen/mOVBRm/license).
