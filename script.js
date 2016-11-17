@@ -85,18 +85,17 @@ $(document).ready(function() {
     var num = $(this).attr('id');
     //if game is still going, box hasn't been selected yet, and 
     //it is not the computer's turn, click will result in x/o placing
-    if ((over == false) && (playedList.indexOf(num) == -1) && (compTurn == false)) {
+    if ((over === false) && (playedList.indexOf(num) === -1) && (compTurn === false)) {
       $("#" + num).html(currPlayer);
       playedList.push(num);
       if (currPlayer == playerOne) {
         oneList.push(num);
         winCheck(oneList);
         currPlayer = playerTwo;
-        if (computer == true) {
+        if (computer === true) {
           compTurnFunc();
         }
       } else {
-        $("#msg").html("twoooh");
         twoList.push(num);
         winCheck(twoList);
         currPlayer = playerOne;
@@ -115,15 +114,14 @@ $(document).ready(function() {
           $("#msg").html("Player Two wins!");
         }
         over = true;
-      } else if (playedList.length == 9 && over == false) {
+      } else if (playedList.length === 9 && over === false) {
         $("#msg").html("It's a tie!");
         over = true;
       }
     }
   }
 
-  //check if x is in array arr.  Solution to inability
-  //to use .indexOf() 
+  //check if x is in array arr.  Alternative to .indexOf();
   function inArray(arr, x) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] == x) {
@@ -135,22 +133,58 @@ $(document).ready(function() {
 
   //computer's turn after pause--note computer is always p2
   function compTurnFunc() {
-    $("#msg").html("comp");
-    //comp turn puts a freeze on user using the board
+    //compTurn puts a freeze on user using the board
     compTurn = true;
-    
-      var num=2;
-    while (inArray(playedList, num)) {
-      num+=1;
-    }
-      $("#"+num).html(currPlayer);
-      playedList.push(num);
-      twoList.push(num);
-      winCheck(twoList);
-      currPlayer = playerOne;
-
+    var num = bestCompChoice();
+    $("#" + num).html(currPlayer);
+    playedList.push(num);
+    twoList.push(num);
+    winCheck(twoList);
+    currPlayer = playerOne;
     compTurn = false;
-     $("#msg").html("ooh");
   }
-  
+
+  function bestCompChoice() {
+    var num = 1;
+//     var listNew = twoList.splice(0);
+//     while (num <= 9) {
+//       while (inArray(playedList, num)) {
+//         num++;
+//       }
+//       listNew.push(num);
+//       for (var i = 0; i < 8; i++) {
+//         var win = wins[i];
+//         if ((inArray(listNew, win[0]) > 0) && (inArray(listNew, win[1]) > 0) && (inArray(listNew, win[2]) > 0)) {
+//           listNew.pop();
+//           return num;
+//         }
+//       }
+//       num++;
+//       listNew.pop();
+//     }
+
+//     num = 1;
+//     listNew = oneList.splice(0);
+//     while (num <= 9) {
+//       while (inArray(playedList, num)) {
+//         num++;
+//       }
+//       listNew.push(num);
+//       for (var i = 0; i < 8; i++) {
+//         var win = wins[i];
+//         if ((inArray(listNew, win[0]) > 0) && (inArray(listNew, win[1]) > 0) && (inArray(listNew, win[2]) > 0)) {
+//           listNew.pop();
+//           return num;
+//         }
+//       }
+//       num++;
+//       listNew.pop();
+//     }
+    num = 1;
+    while (inArray(playedList, num)) {
+      num++;
+    }
+    return num;
+  }
+
 });
