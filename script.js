@@ -76,8 +76,8 @@ $(document).ready(function() {
     $(".board").addClass("hidden");
     for (var i = 1; i <= 9; i++) {
       $("#" + i).html("");
-      $("#msg").html("");
     }
+    $("#msg").html("");
   });
 
   //response to clicking of tic tac toe board
@@ -105,20 +105,30 @@ $(document).ready(function() {
 
   //checks if board has any three in a rows and return message
   function winCheck(lst) {
+
+    if (comboCheck(lst)) {
+      if (currPlayer == playerOne) {
+        $("#msg").html("Player One wins!");
+      } else {
+        $("#msg").html("Player Two wins!");
+      }
+      over = true;
+    } else if (playedList.length === 9 && over === false) {
+      $("#msg").html("It's a tie!");
+      over = true;
+
+    }
+  }
+
+  //check if lst has ability to make tic-tac-toe three in a row
+  function comboCheck(lst) {
     for (var i = 0; i < 8; i++) {
       var win = wins[i];
       if ((inArray(lst, win[0]) > 0) && (inArray(lst, win[1]) > 0) && (inArray(lst, win[2]) > 0)) {
-        if (currPlayer == playerOne) {
-          $("#msg").html("Player One wins!");
-        } else {
-          $("#msg").html("Player Two wins!");
-        }
-        over = true;
-      } else if (playedList.length === 9 && over === false) {
-        $("#msg").html("It's a tie!");
-        over = true;
+        return true;
       }
     }
+    return false;
   }
 
   //check if x is in array arr.  Alternative to .indexOf();
@@ -145,46 +155,28 @@ $(document).ready(function() {
   }
 
   function bestCompChoice() {
-    var num = 1;
-//     var listNew = twoList.splice(0);
-//     while (num <= 9) {
-//       while (inArray(playedList, num)) {
-//         num++;
-//       }
-//       listNew.push(num);
-//       for (var i = 0; i < 8; i++) {
-//         var win = wins[i];
-//         if ((inArray(listNew, win[0]) > 0) && (inArray(listNew, win[1]) > 0) && (inArray(listNew, win[2]) > 0)) {
-//           listNew.pop();
-//           return num;
-//         }
-//       }
-//       num++;
-//       listNew.pop();
-//     }
+    var someNum = 1;
+    var someList = twoList.slice(0);
+    while (someNum < 10) {
+      if (inArray(playedList, someNum) < 1) {
+        someList.push(someNum);
+        if (comboCheck(someList)) {
+          return someNum;
+        } else {
+          someList.pop();
+          someNum++;
+        }
 
-//     num = 1;
-//     listNew = oneList.splice(0);
-//     while (num <= 9) {
-//       while (inArray(playedList, num)) {
-//         num++;
-//       }
-//       listNew.push(num);
-//       for (var i = 0; i < 8; i++) {
-//         var win = wins[i];
-//         if ((inArray(listNew, win[0]) > 0) && (inArray(listNew, win[1]) > 0) && (inArray(listNew, win[2]) > 0)) {
-//           listNew.pop();
-//           return num;
-//         }
-//       }
-//       num++;
-//       listNew.pop();
-//     }
-    num = 1;
-    while (inArray(playedList, num)) {
-      num++;
+      } else {
+        someNum++;
+      }
+
     }
-    return num;
+   someNum = 1;
+    while (inArray(playedList, someNum)) {
+      someNum++;
+    }
+    return someNum;
   }
 
 });
