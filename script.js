@@ -91,9 +91,11 @@ $(document).ready(function() {
       if (currPlayer == playerOne) {
         oneList.push(num);
         winCheck(oneList);
+        if (!over){
         currPlayer = playerTwo;
         if (computer === true) {
           compTurnFunc();
+        }
         }
       } else {
         twoList.push(num);
