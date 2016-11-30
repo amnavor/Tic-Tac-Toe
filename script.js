@@ -157,6 +157,7 @@ $(document).ready(function() {
   }
 
   function bestCompChoice() {
+  //see if comp can get a tic-tac-toe
     var someNum = 1;
     var someList = twoList.slice(0);
     while (someNum < 10) {
@@ -174,6 +175,27 @@ $(document).ready(function() {
       }
 
     }
+  
+ //see if comp can block a tic-tac-toe
+    someNum = 1;
+    someList = oneList.slice(0);
+    while (someNum < 10) {
+      if (inArray(playedList, someNum) < 1) {
+        someList.push(someNum);
+        if (comboCheck(someList)) {
+          return someNum;
+        } else {
+          someList.pop();
+          someNum++;
+        }
+
+      } else {
+        someNum++;
+      }
+
+    }
+ 
+//otherwise, just do the next open box
    someNum = 1;
     while (inArray(playedList, someNum)) {
       someNum++;
