@@ -195,10 +195,10 @@ $(document).ready(function() {
 
     }
  
-//otherwise, just do the next open box
-   someNum = 1;
-    while (inArray(playedList, someNum)) {
-      someNum++;
+  //otherwise, just do the next open box
+   someNum = Math.floor((Math.random() * 10) + 1);
+    while (inArray(playedList, someNum) && someNum<10) {
+      someNum=Math.floor((Math.random() * 10) + 1);
     }
     return someNum;
   }
