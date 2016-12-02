@@ -147,13 +147,17 @@ $(document).ready(function() {
   function compTurnFunc() {
     //compTurn puts a freeze on user using the board
     compTurn = true;
+    setTimeout(delayedCompTurnFunc, 1000);
+    compTurn = false;
+  }
+  
+  function delayedCompTurnFunc() {
     var num = bestCompChoice();
     $("#" + num).html(currPlayer);
     playedList.push(num);
     twoList.push(num);
     winCheck(twoList);
     currPlayer = playerOne;
-    compTurn = false;
   }
 
   function bestCompChoice() {
