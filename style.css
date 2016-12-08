@@ -8,22 +8,23 @@
   }
 
 td {
-  height: 30px;
-  width: 30px;
+  height: 60px;
+  width: 60px;
   text-align: center;
   border: solid;
+  font-size: 40px;
 }
 
 #main {
-  border: solid black;
-  height: 300px;
-  width: 300px;
+  height: 400px;
+  width: 400px;
   margin: 0 auto;
-  margin-top: 40px;
+
   padding-top: 25px;
 }
 
 body {
+  font-size: 30px;
   text-align: center;
   background: url() fixed center no-repeat;
   background-size: cover;
@@ -33,4 +34,29 @@ table {
     margin-left: auto;
     margin-right: auto;
     padding: 30px;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: "Times New Roman";
+  font-size: 30px;
+}
+
+button:hover {
+  color: grey;
+}
+
+button:focus {
+  outline: none;
+}
+
+.xBud {
+  background: url(http://www.clipartbest.com/cliparts/yik/bLe/yikbLekiE.gif) center no-repeat;
+   background-size: 80px 60px;
+}
+
+.oBud {
+  background: url(http://www.picgifs.com/alphabets/alphabets/dancing-1/alphabets-dancing-1-883248.gif) center no-repeat;
+  background-size: 80px 60px;
 }
