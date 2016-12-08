@@ -23,8 +23,10 @@ $(document).ready(function() {
   var computer = false;
   var over = false;
   var compTurn = false;
+  var x = "xBud";
+  var o = "oBud";
 
-  //first menu option, ie single vs two player
+  //first menu option, ie single (first) vs two (second) player
   $("#first").click(function() {
     $(".signOne").removeClass("hidden");
     $(".players").addClass("hidden");
@@ -38,8 +40,8 @@ $(document).ready(function() {
 
   //second option: x vs o
   $(".x").click(function() {
-    playerOne = "x";
-    playerTwo = "o";
+    playerOne = x;
+    playerTwo = o;
     currPlayer = playerOne;
     $(".signOne").addClass("hidden");
     $(".signTwo").addClass("hidden");
@@ -49,8 +51,8 @@ $(document).ready(function() {
   });
 
   $(".o").click(function() {
-    playerOne = "o";
-    playerTwo = "x";
+    playerOne = o;
+    playerTwo = x;
     currPlayer = playerOne;
     $(".signOne").addClass("hidden");
     $(".signTwo").addClass("hidden");
@@ -75,9 +77,10 @@ $(document).ready(function() {
     $(".signOne").addClass("hidden");
     $(".board").addClass("hidden");
     for (var i = 1; i <= 9; i++) {
-      $("#" + i).html("");
+      $("#" + i).removeClass(x);
+      $("#" + i).removeClass(o);
     }
-    $("#msg").html("");
+    $("#msg").html("<br>");
   });
 
   //response to clicking of tic tac toe board
@@ -86,7 +89,7 @@ $(document).ready(function() {
     //if game is still going, box hasn't been selected yet, and 
     //it is not the computer's turn, click will result in x/o placing
     if ((over === false) && (playedList.indexOf(num) === -1) && (compTurn === false)) {
-      $("#" + num).html(currPlayer);
+      $("#" + num).addClass(currPlayer);
       playedList.push(num);
       if (currPlayer == playerOne) {
         oneList.push(num);
@@ -153,7 +156,7 @@ $(document).ready(function() {
   
   function delayedCompTurnFunc() {
     var num = bestCompChoice();
-    $("#" + num).html(currPlayer);
+    $("#" + num).addClass(currPlayer);
     playedList.push(num);
     twoList.push(num);
     winCheck(twoList);
