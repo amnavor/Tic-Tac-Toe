@@ -1,3 +1,4 @@
+//all the possible winning combinatinos
 var wins = [
   [1, 2, 3],
   [4, 5, 6],
@@ -26,19 +27,19 @@ $(document).ready(function() {
   var x = "xBud";
   var o = "oBud";
 
-  //first menu option, ie single (first) vs two (second) player
+//first menu option, ie single player (first) vs two player (second) 
   $("#first").click(function() {
     $(".signOne").removeClass("hidden");
     $(".players").addClass("hidden");
     computer = true;
   });
-
+  
   $("#second").click(function() {
     $(".signTwo").removeClass("hidden");
     $(".players").addClass("hidden");
   });
 
-  //second option: x vs o
+//second option menu: x vs o
   $(".x").click(function() {
     playerOne = x;
     playerTwo = o;
@@ -61,7 +62,7 @@ $(document).ready(function() {
     $('#p1').html('O');
   });
 
-  //startover -- can be selected at anytime to clear all settings
+//startover -- can be selected at anytime to clear all settings
   $(".startOver").click(function() {
     oneList = [];
     compTurn = false;
@@ -83,7 +84,7 @@ $(document).ready(function() {
     $("#msg").html("<br>");
   });
 
-  //response to clicking of tic tac toe board
+//response to clicking of tic tac toe board
   $("td").click(function() {
     var num = $(this).attr('id');
     //if game is still going, box hasn't been selected yet, and 
@@ -96,8 +97,10 @@ $(document).ready(function() {
         winCheck(oneList);
         if (!over){
         currPlayer = playerTwo;
+//after a pause and freeze on board, have computer take turn
         if (computer === true) {
-          compTurnFunc();
+          compTurn = true;
+          setTimeout(compTurnFunc, 1000);
         }
         }
       } else {
@@ -108,24 +111,23 @@ $(document).ready(function() {
     }
   });
 
-  //checks if board has any three in a rows and return message
+//checks if board has any three in a rows and return message
   function winCheck(lst) {
-
     if (comboCheck(lst)) {
       if (currPlayer == playerOne) {
-        $("#msg").html("Player One wins!");
+        $("#msg").html("Groovy! Player One wins!");
       } else {
-        $("#msg").html("Player Two wins!");
+        $("#msg").html("Far out! Player Two wins!");
       }
       over = true;
     } else if (playedList.length === 9 && over === false) {
-      $("#msg").html("It's a tie!");
+      $("#msg").html("Tubular! It's a tie!");
       over = true;
 
     }
   }
 
-  //check if lst has ability to make tic-tac-toe three in a row
+//check if lst has ability to make tic-tac-toe three in a row
   function comboCheck(lst) {
     for (var i = 0; i < 8; i++) {
       var win = wins[i];
@@ -136,7 +138,7 @@ $(document).ready(function() {
     return false;
   }
 
-  //check if x is in array arr.  Alternative to .indexOf();
+//check if x is in array arr.  Alternative to .indexOf() since that was being buggy on CodePen
   function inArray(arr, x) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] == x) {
@@ -146,25 +148,19 @@ $(document).ready(function() {
     return 0;
   }
 
-  //computer's turn after pause--note computer is always p2
+//computer's turn after pause--note computer is always p2
   function compTurnFunc() {
-    //compTurn puts a freeze on user using the board
-    compTurn = true;
-    setTimeout(delayedCompTurnFunc, 1000);
-    compTurn = false;
-  }
-  
-  function delayedCompTurnFunc() {
     var num = bestCompChoice();
     $("#" + num).addClass(currPlayer);
     playedList.push(num);
     twoList.push(num);
     winCheck(twoList);
     currPlayer = playerOne;
+    compTurn = false;
   }
 
-  function bestCompChoice() {
-  //see if comp can get a tic-tac-toe
+ //see if comp can get a tic-tac-toe
+ function bestCompChoice() {
     var someNum = 1;
     var someList = twoList.slice(0);
     while (someNum < 10) {
@@ -176,13 +172,10 @@ $(document).ready(function() {
           someList.pop();
           someNum++;
         }
-
       } else {
         someNum++;
       }
-
     }
-  
  //see if comp can block a tic-tac-toe
     someNum = 1;
     someList = oneList.slice(0);
@@ -195,13 +188,10 @@ $(document).ready(function() {
           someList.pop();
           someNum++;
         }
-
       } else {
         someNum++;
       }
-
     }
- 
   //otherwise, just do the next open box
    someNum = Math.floor((Math.random() * 10) + 1);
     while (inArray(playedList, someNum) && someNum<10) {
@@ -209,5 +199,5 @@ $(document).ready(function() {
     }
     return someNum;
   }
-
+  
 });
