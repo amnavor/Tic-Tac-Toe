@@ -19,15 +19,15 @@ td {
   height: 400px;
   width: 400px;
   margin: 0 auto;
-
   padding-top: 25px;
 }
 
 body {
   font-size: 30px;
   text-align: center;
-  background: url() fixed center no-repeat;
+  background: url(http://i.vimeocdn.com/video/460516322_1280x720.jpg) fixed center no-repeat;
   background-size: cover;
+  color: white;
 }
 
 table { 
@@ -41,6 +41,7 @@ button {
   background: none;
   font-family: "Times New Roman";
   font-size: 30px;
+  color: white;
 }
 
 button:hover {
