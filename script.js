@@ -193,9 +193,9 @@ $(document).ready(function() {
       }
     }
   //otherwise, just do the next open box
-   someNum = Math.floor((Math.random() * 10) + 1);
+   someNum = Math.ceil((Math.random() * 10));
     while (inArray(playedList, someNum) && someNum<10) {
-      someNum=Math.floor((Math.random() * 10) + 1);
+      someNum=Math.ceil((Math.random() * 10));
     }
     return someNum;
   }
