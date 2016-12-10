@@ -32,11 +32,15 @@ $(document).ready(function() {
     $(".signOne").removeClass("hidden");
     $(".players").addClass("hidden");
     computer = true;
+    $("#p1Name").html("Player");
+    $("#p2Name").html("Computer");
   });
   
   $("#second").click(function() {
     $(".signTwo").removeClass("hidden");
     $(".players").addClass("hidden");
+    $("#p1Name").html("Player 1");
+    $("#p2Name").html("Player 2");
   });
 
 //second option menu: x vs o
@@ -115,9 +119,17 @@ $(document).ready(function() {
   function winCheck(lst) {
     if (comboCheck(lst)) {
       if (currPlayer == playerOne) {
+        if (computer === true) {
+          $("#msg").html("Groovy! You win!");
+        } else {
         $("#msg").html("Groovy! Player One wins!");
+        }
       } else {
+        if (computer === true) {
+          $("#msg").html("Bummer! You lost!");
+        } else {
         $("#msg").html("Far out! Player Two wins!");
+        }
       }
       over = true;
     } else if (playedList.length === 9 && over === false) {
