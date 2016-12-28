@@ -4,5 +4,6 @@ Tic-Tac-Toe game.  Play against a friend or the computer.  Try it [here](http://
 
 ![img](https://cloud.githubusercontent.com/assets/12720744/21077768/3bbc297c-bf0b-11e6-811c-0cff3a7d6e8e.gif)
 
-Images from [PicGifs](picgifs.com), [Ben Hanbury](https://vimeo.com/user784722)
+Images from [PicGifs](picgifs.com), [Ben Hanbury](https://vimeo.com/user784722).
+
 [License](http://codepen.io/amnavor/pen/mOVBRm/license).
